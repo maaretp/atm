@@ -7,6 +7,8 @@ while True:
     withdraw_amount_str = input("Enter the amount you want to withdraw: ")
     if withdraw_amount_str.isdigit():
         withdraw_amount = int(withdraw_amount_str)
+    elif (withdraw_amount_str == "exit"):
+        break
     else:
         print("Invalid input. Please enter a valid integer.")
     bills = account.withdraw(withdraw_amount, atm)

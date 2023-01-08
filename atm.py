@@ -1,9 +1,9 @@
 class ATM:
     def __init__(self):
         self.euro_bills = {
-            20: 1,
+            20: 2,
             50: 1,
-            100: 1
+            100: 3
         }
 
     def dispense(self, amount):
@@ -22,7 +22,7 @@ class ATM:
                         self.euro_bills[bill] -= 1
                         amount_left -= bill
                 if amount_left > 0:
-                    return "Required amount cannot be dispensed using the available denominations"
+                    return "Required amount cannot be dispensed using the available bills"
                 else:
                     return result
 
@@ -32,11 +32,13 @@ class Account:
         self.balance = balance
 
     def withdraw(self, amount, atm):
-        if (amount > self.daily_limit_per_account or amount > self.balance):
+        if (amount > self.balance):
             return "Insufficient funds in account"
+        elif (amount > self.daily_limit_per_account):
+            return "Daily withdrawal limit reached"
         else:
             result = atm.dispense(amount)
-            if isinstance(result, dict):
+            if not isinstance(result, str):
                 self.balance -= amount
                 self.daily_limit_per_account -= amount
                 return result

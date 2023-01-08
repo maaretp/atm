@@ -1,6 +1,5 @@
 # Assignment
 
-
 **An ATM allows a daily withdraw limit of $300**
 
 You can’t ask the stakeholder any questions about the requirement, what tests would you run to understand the requirement better and test this functionality?
