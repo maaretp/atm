@@ -1,7 +1,9 @@
-from atm import ATM, Account
+from atm import ATM, Account, LimitError, FundsError, BillsError, BalanceError
 
 atm = ATM()
 account = Account(300)
+
+bills = ""
 
 while True:
     withdraw_amount_str = input("Enter the amount you want to withdraw: ")
@@ -11,6 +13,12 @@ while True:
         break
     else:
         print("Invalid input. Please enter a valid integer.")
-    bills = account.withdraw(withdraw_amount, atm)
-    print("Bills dispensed: ", bills)
-    print("Account balance: ", account.balance)
+    try:
+        bills = account.withdraw(withdraw_amount, atm)
+    except (LimitError, FundsError, BillsError, BalanceError) as e:
+        print("Error: ", e)
+        if BillsError: 
+            bills = ""
+    finally:
+        print("Bills dispensed: ", bills)
+        print("Account balance: ", account.balance)
