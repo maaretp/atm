@@ -6,18 +6,19 @@ account = Account(300)
 bills = ""
 
 while True:
+    withdraw_amount: int = 0
     withdraw_amount_str = input("Enter the amount you want to withdraw: ")
     if withdraw_amount_str.isdigit():
         withdraw_amount = int(withdraw_amount_str)
-    elif (withdraw_amount_str == "exit"):
+    elif withdraw_amount_str == "exit":
         break
     else:
-        print("Invalid input. Please enter a valid integer.")
+        print("Invalid input. Please enter a valid integer or 'exit'.")
     try:
         bills = account.withdraw(withdraw_amount, atm)
     except (LimitError, FundsError, BillsError, BalanceError) as e:
         print("Error: ", e)
-        if BillsError: 
+        if BillsError:
             bills = ""
     finally:
         print("Bills dispensed: ", bills)
